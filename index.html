@@ -97,7 +97,7 @@ var ParticlePool=function(){var a,b=0,c=0,d=settings.particles.duration;function
 function f(f){return new Point(160*Math.pow(Math.sin(f),3),130*Math.cos(f)-50*Math.cos(2*f)-20*Math.cos(3*f)-10*Math.cos(4*f)+25)}
 var g=function(){var a=document.createElement("canvas"),b=a.getContext("2d");a.width=settings.particles.size;a.height=settings.particles.size;
 function c(c){var d=f(c);d.x=settings.particles.size/2+d.x*settings.particles.size/350;d.y=settings.particles.size/2-d.y*settings.particles.size/350;return d}
-b.beginPath();var d=-Math.PI,e=c(d);b.moveTo(e.x,e.y);while(d<Math.PI){d+=0.01;e=c(d);b.lineTo(e.x,e.y)}b.closePath();b.fillStyle="#ffffff";b.fill();var h=new Image;h.src=a.toDataURL();return h}();
+b.beginPath();var d=-Math.PI,e=c(d);b.moveTo(e.x,e.y);while(d<Math.PI){d+=0.01;e=c(d);b.lineTo(e.x,e.y)}b.closePath();b.fillStyle="#ffb6e6";b.fill();var h=new Image;h.src=a.toDataURL();return h}();
 function h(){requestAnimationFrame(h);var f=(new Date).getTime()/1000,i=f-(d||f);d=f;a.clearRect(0,0,e.width,e.height);var j=c*i;for(var k=0;k<j;k++){var l=f(Math.PI-2*Math.PI*Math.random()),m=l.clone().length(settings.particles.velocity);b.add(e.width/2+l.x,e.height/2-l.y,m.x,-m.y)}b.update(i);b.draw(a,g)}
 function i(){e.width=e.clientWidth;e.height=e.clientHeight}
 window.onresize=i;setTimeout(function(){i();h()},10)
