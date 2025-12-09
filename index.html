@@ -27,7 +27,6 @@
     left:0;
   }
 
-  /* overlay */
   #overlay{
     position:fixed;
     inset:0;
@@ -37,17 +36,15 @@
     align-items:center;
     opacity:0;
     pointer-events:none;
-    transition:opacity 1s ease, transform 1s ease;
-    transform:scale(0.97);
+    transition:opacity .9s ease, transform .9s ease;
+    transform:scale(.97);
   }
-
   #overlay.show{
     opacity:1;
     pointer-events:auto;
     transform:scale(1);
   }
 
-  /* text */
   #overlayContent{
     text-align:center;
     color:black;
@@ -59,7 +56,7 @@
     font-family:'Playfair Display',serif;
     font-weight:700;
     font-size:3rem;
-    margin-bottom:0.8rem;
+    margin-bottom:.8rem;
     letter-spacing:0.5px;
   }
 
@@ -69,7 +66,6 @@
     font-size:1.2rem;
     opacity:0.8;
   }
-
 </style>
 </head>
 
@@ -77,17 +73,15 @@
 
 <canvas id="pinkboard"></canvas>
 
-<!-- overlay -->
 <div id="overlay">
   <div id="overlayContent">
     <h1>Szeretlek Maki 🤍</h1>
-    <p>Legyen csodaszép napod. Minden rendben lesz, én tudom.✨</p>
+    <p>Legyen nagyon szép napod. Nyugalom. Minden rendben lesz.✨</p>
   </div>
 </div>
 
-
 <script>
-/* ---------------- HEART ANIMATION (unchanged) -------------------- */
+/* HEART ANIM ------------------- */
 var settings={particles:{length:8000,duration:3,velocity:70,effect:-1.2,size:7}};
 (function(){var b=0,c=["ms","moz","webkit","o"];for(var a=0;a<c.length&&!window.requestAnimationFrame;++a){window.requestAnimationFrame=window[c[a]+"RequestAnimationFrame"];window.cancelAnimationFrame=window[c[a]+"CancelAnimationFrame"]||window[c[a]+"CancelRequestAnimationFrame"]}if(!window.requestAnimationFrame){window.requestAnimationFrame=function(h,e){var d=(new Date).getTime(),f=Math.max(0,16-(d-b)),g=window.setTimeout(function(){h(d+f)},f);b=d+f;return g}}if(!window.cancelAnimationFrame){window.cancelAnimationFrame=function(d){clearTimeout(d)}}})();
 var Point=function(){function e(a,b){this.x=typeof a!=="undefined"?a:0;this.y=typeof b!=="undefined"?b:0}e.prototype.clone=function(){return new e(this.x,this.y)};e.prototype.length=function(a){if(typeof a=="undefined")return Math.sqrt(this.x*this.x+this.y*this.y);this.normalize();this.x*=a;this.y*=a;return this};e.prototype.normalize=function(){var a=this.length();this.x/=a;this.y/=a;return this};return e}();
@@ -97,25 +91,23 @@ var ParticlePool=function(){var a,b=0,c=0,d=settings.particles.duration;function
 function f(f){return new Point(160*Math.pow(Math.sin(f),3),130*Math.cos(f)-50*Math.cos(2*f)-20*Math.cos(3*f)-10*Math.cos(4*f)+25)}
 var g=function(){var a=document.createElement("canvas"),b=a.getContext("2d");a.width=settings.particles.size;a.height=settings.particles.size;
 function c(c){var d=f(c);d.x=settings.particles.size/2+d.x*settings.particles.size/350;d.y=settings.particles.size/2-d.y*settings.particles.size/350;return d}
-b.beginPath();var d=-Math.PI,e=c(d);b.moveTo(e.x,e.y);while(d<Math.PI){d+=0.01;e=c(d);b.lineTo(e.x,e.y)}b.closePath();b.fillStyle="#ffb6e6";b.fill();var h=new Image;h.src=a.toDataURL();return h}();
+b.beginPath();var d=-Math.PI,e=c(d);b.moveTo(e.x,e.y);while(d<Math.PI){d+=0.01;e=c(d);b.lineTo(e.x,e.y)}b.closePath();
+
+/* ❤ FIX = erős PINK */
+b.fillStyle="#ff5bbc";
+b.fill();
+
+var h=new Image;h.src=a.toDataURL();return h}();
 function h(){requestAnimationFrame(h);var f=(new Date).getTime()/1000,i=f-(d||f);d=f;a.clearRect(0,0,e.width,e.height);var j=c*i;for(var k=0;k<j;k++){var l=f(Math.PI-2*Math.PI*Math.random()),m=l.clone().length(settings.particles.velocity);b.add(e.width/2+l.x,e.height/2-l.y,m.x,-m.y)}b.update(i);b.draw(a,g)}
 function i(){e.width=e.clientWidth;e.height=e.clientHeight}
 window.onresize=i;setTimeout(function(){i();h()},10)
 })(document.getElementById("pinkboard"));
-/* ---------------- END HEART -------------------- */
 
-
-/* ---------- CLICK REVEAL ------------ */
+/* REVEAL */
 const overlay=document.getElementById("overlay")
 document.body.addEventListener("click",()=>{
   overlay.classList.add("show")
 })
-
-/* ESC to close */
-document.addEventListener("keydown",e=>{
-  if(e.key==="Escape")overlay.classList.remove("show")
-})
 </script>
-
 </body>
 </html>
