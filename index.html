@@ -240,6 +240,11 @@
         }
         particles.update(deltaTime);
         particles.draw(context, image);
+        context.font = "48px Arial";
+context.fillStyle = "white";
+context.textAlign = "center";
+context.fillText("Legyen szép napod!", canvas.width/2, canvas.height/2 - 120);
+
       }
       function onResize() {
         canvas.width = canvas.clientWidth;
